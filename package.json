@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^5.0.5",
-    "mysql": "^2.9.0"
+    "mysql": "^2.9.0",
+    "oracledb": "^1.0.0"
   }
 }
