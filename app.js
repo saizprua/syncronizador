@@ -2,7 +2,28 @@ var mysql = require('mysql'),
     fs = require('fs'),
     jwt = require('jsonwebtoken'),
     config = require('./config'),
-    oracledb = require('oracledb');
+    oracledb = require('oracledb'),
+    oracle = require('oracle');
+
+var connectData = {
+    hostname: "ORAERP",
+    port: 1521,
+    database: "PRUEBA", // System ID (SID)
+    user: "syndb",
+    password: "aig2k15"
+}
+
+
+oracle.connect(connectData, function(err, connection) {
+    if (err) { console.log("Error connecting to db:", err); return; }
+
+    connection.execute("SELECT systimestamp FROM dual", [], function(err, results) {
+        if (err) { console.log("Error executing query:", err); return; }
+
+        console.log(results);
+        connection.close(); // call only when query is finished executing
+    });
+});
 
 //var cert = fs.readFileSync('public.pem');  // get public key
 //
@@ -19,24 +40,21 @@ var mysql = require('mysql'),
 //
 //connection.end();
 
-oracledb.getConnection(
-    {	
-        user          : "system",
-        password      : "prueba2015",
-        connectString : "PRUEBA"
-    },
-    function(err, connection)
-    {
-        if (err) { console.error(err.message); return; }
+//oracledb.getConnection(
+//    {
+//        user          : "system",
+//        password      : "prueba2015",
+//        connectString : "PRUEBA"
+//    },
+//    function(err, connection) {
+//
+//        co
+//
+//        if (err) {
+//            console.error(err.message);
+//            return;
+//        }
+//
+//    }
 
-        console.log(connection);
 
-        //connection.execute(
-        //    "SELECT department_id, department_name FROM departments WHERE department_id = :did",
-        //    [180],  // bind value for :did
-        //    function(err, result)
-        //    {
-        //        if (err) { console.error(err.message); return; }
-        //        console.log(result.rows);
-        //    });
-    });
