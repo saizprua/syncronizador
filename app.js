@@ -20,10 +20,10 @@ var mysql = require('mysql'),
 //connection.end();
 
 oracledb.getConnection(
-    {
-        user          : "syndb",
-        password      : "aig2k15",
-        connectString : "10.252.76.115/PLANDAC"
+    {	
+        user          : "system",
+        password      : "prueba2015",
+        connectString : "PRUEBA"
     },
     function(err, connection)
     {
