@@ -1,0 +1,3 @@
+{
+  "lastParams":"SELECT * FROM (SELECT  ifnull(MAX(NUM_EMPLEADO),'') lastNumEmployee FROM erp_empleados) NumEmployee,(SELECT MAX(FECHA_DEL_SISTEMAU) lastDateUpdateEmployee FROM erp_empleados) DateUpdateEmployee"
+}
