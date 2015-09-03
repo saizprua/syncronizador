@@ -1,4 +1,4 @@
-var process = require('./server/process'),
+var proc = require('./server/process'),
     winston = require('winston'),
     schedule = require('node-schedule');
 
@@ -8,14 +8,17 @@ winston.add(winston.transports.File, {
 
 
 
-schedule.scheduleJob('*/30 * * * *', function(){
-    process.ecxecute(function(isSuccess){
+schedule.scheduleJob('*/1 * * * *', function(){
+    proc.ecxecute(function(isSuccess){
         if(isSuccess){
             winston.info('Proccess successfully')
         }
         else{
             winston.warn('Proccess failed')
         }
+
+        winston.info('****************************************************');
+        console.log(' ');
     });
 });
 

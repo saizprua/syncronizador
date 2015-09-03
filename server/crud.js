@@ -76,7 +76,6 @@ exports.insertRowsMysql = function(rows) {
     var connection = con.getConnectionMysql();
 
     connection.query("INSERT INTO erp_empleados(??) VALUES ?", [config.columms, rows], function(err) {
-        if (err) winston.error(err);
         connection.end();
     });
 
@@ -89,6 +88,8 @@ exports.insertOrUpdateRowMysql = function(rows) {
 
 
     if (rows.length === 0) return;
+
+    winston.info('Insert or update employees...');
 
     rows.forEach(function(emp) {
 

@@ -7,7 +7,7 @@ var crud = require('./crud'),
 
 exports.ecxecute = function(callback){
 
-
+    winston.info('****************************************************');
     winston.info('Init process migrations oracle - mysql...');
     winston.info('Find lastParams in mysql database...');
     crud.getLastParamMysql(function(lastFields) {
@@ -42,6 +42,7 @@ exports.ecxecute = function(callback){
             } else {
                 winston.info('Not found alter employees');
             }
+
 
              callback(true);
 
