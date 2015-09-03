@@ -8,6 +8,7 @@ var crud = require('./crud'),
 exports.ecxecute = function(callback){
 
     winston.info('****************************************************');
+    console.info(new Date());
     winston.info('Init process migrations oracle - mysql...');
     winston.info('Find lastParams in mysql database...');
     crud.getLastParamMysql(function(lastFields) {
@@ -51,6 +52,3 @@ exports.ecxecute = function(callback){
     });
 
 }
-
-
-
