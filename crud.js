@@ -1,23 +1,23 @@
-var mysql = require('mysql'),
-    config = require('./config'),
+var config = require('./config'),
     query = require('./query'),
-    oracledb = require('oracledb');
+    oracledb = require('oracledb'),
+    con = require('./connection'),
+    winston = require('winston');
 
 
 exports.getLastParamMysql = function(callback) {
 
-    var connection = mysql.createConnection(config.mysql);
-    connection.connect();
+    var connection = con.getConnectionMysql();
 
     connection.query(query.lastParams,
         function(err, rows) {
             connection.end();
 
-            if (err) {
-                throw err;
-            }
+            if (err) winston.error(err);
 
-            callback(rows[0]);
+            var res = rows ? rows[0] : null;
+
+            callback(res);
         });
 
 };
@@ -46,26 +46,24 @@ exports.getDataOracle = function(lastFields, callback) {
         }
     }
 
+    con.getConnectionOracle(function(err,connection){
 
-    oracledb.getConnection(
-        config.oracle,
-        function(err, connection) {
-            if (err) {
-                throw err;
-            }
+        if(err){
 
-            connection.execute(
-                "SELECT " + config.columms + " FROM PLANDAC.EMPLEADOS " + where,
-                params,
-                queryConfig,
-                function(err, result) {
-                    if (err) {
-                        throw err;
-                    }
+            winston.error( err.toString());
+            return callback(null);
+        }
 
-                    callback(result);
-                });
-        });
+        connection.execute(
+            "SELECT " + config.columms + " FROM PLANDAC.EMPLEADOS " + where,
+            params,
+            queryConfig,
+            function(err, result) {
+                if (err) winston.error(err);
+
+                callback(result);
+            });
+    });
 
 };
 
@@ -74,38 +72,31 @@ exports.insertRowsMysql = function(rows) {
 
     if (rows.length === 0) return;
 
-    console.log('Inserting news employees mysql...');
+    var connection = con.getConnectionMysql();
 
-    var connection = mysql.createConnection(config.mysql);
-
-    connection.connect();
-
-
-    connection.query("INSERT INTO erp_empleados(??) VALUES ?", [config.columms, rows], function(err, result) {
-        if (err) throw err;
+    connection.query("INSERT INTO erp_empleados(??) VALUES ?", [config.columms, rows], function(err) {
+        if (err)  winston.error(err);
+        connection.end();
     });
-
-    connection.end();
 
 
 };
 
 exports.insertOrUpdateRowMysql = function(rows) {
 
-    var connection = mysql.createConnection(config.mysql);
-    connection.connect();
+    var connection = con.getConnectionMysql();
 
-    console.log('Init inserting or updating new employee in mysql...');
 
     if (rows.length === 0) return;
 
     rows.forEach(function(emp) {
 
-        connection.query('INSERT INTO erp_empleados SET ? ON DUPLICATE KEY UPDATE ?', [emp, emp], function(err, results) {
-
+        connection.query('INSERT INTO erp_empleados SET ? ON DUPLICATE KEY UPDATE ?', [emp, emp], function(err) {
+            winston.error(err);
         });
 
     });
     connection.end();
 
 };
+

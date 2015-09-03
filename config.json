@@ -7,7 +7,7 @@
     "multipleStatements":true
   },
   "oracle":{
-    "user"          : "syndb",
+    "user"          : "syndbs",
     "password"      : "aig2k15",
     "connectString" : "ORAERP/PRUEBA"
   },

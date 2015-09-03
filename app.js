@@ -1,28 +1,45 @@
-var crud = require('./crud');
+var crud = require('./crud'),
+    winston = require('winston');
 
-console.log('Init application...')
-console.log('Find lastParams in mysql database...');
+winston.add(winston.transports.File, { filename: 'node.log' });
+
+
+
+
+
+winston.info('Init application...')
+winston.info('Find lastParams in mysql database...');
 crud.getLastParamMysql(function(lastFields) {
 
-    console.log('Find data in oracle database...');
+    if(!lastFields) {
+        winston.error('Error to connect mysql database');
+        return;
+    }
+
+    winston.info('Find data in oracle database...');
     crud.getDataOracle(lastFields, function(data) {
+
+        if(!data){
+            winston.error('Error to connecto oracle database');
+            return;
+        }
 
         if (data.rows.length > 0) {
 
-            console.log('The news data was found...');
+            winston.info('The news data was found...');
             if (!lastFields.lastNumEmployee) {
 
-                console.log('Init first insert data...');
+                winston.info('Init first insert data...');
                 crud.insertRowsMysql(data.rows);
             } else {
 
-                console.log('Init modify data...');
+                winston.info('Init modify data...');
                 crud.insertOrUpdateRowMysql(data.rows);
 
             }
 
         } else {
-            console.log('Not found alter employees');
+            winston.info('Not found alter employees');
         }
 
     });

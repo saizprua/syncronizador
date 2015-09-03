@@ -32,6 +32,7 @@ Icon
 # --------------------
 .nodemonignore
 npm-debug.log
+node.log
 node_modules/
 
 
