@@ -10,11 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^5.0.5",
-    "lodash": "^3.10.1",
     "mysql": "^2.9.0",
-    "node-crontab": "0.0.8",
     "node-schedule": "^0.2.9",
-    "oracle": "^0.3.8",
     "oracledb": "^1.0.0",
     "winston": "^1.0.1"
   }
