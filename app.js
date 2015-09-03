@@ -1,17 +1,16 @@
 var crud = require('./crud'),
     winston = require('winston');
 
-winston.add(winston.transports.File, { filename: 'node.log' });
-
-
-
+winston.add(winston.transports.File, {
+    filename: 'node.log'
+});
 
 
 winston.info('Init application...')
 winston.info('Find lastParams in mysql database...');
 crud.getLastParamMysql(function(lastFields) {
 
-    if(!lastFields) {
+    if (!lastFields) {
         winston.error('Error to connect mysql database');
         return;
     }
@@ -19,7 +18,7 @@ crud.getLastParamMysql(function(lastFields) {
     winston.info('Find data in oracle database...');
     crud.getDataOracle(lastFields, function(data) {
 
-        if(!data){
+        if (!data) {
             winston.error('Error to connecto oracle database');
             return;
         }
@@ -49,11 +48,6 @@ crud.getLastParamMysql(function(lastFields) {
 
 //
 //
-
-
-
-
-
 
 
 
@@ -101,5 +95,3 @@ crud.getLastParamMysql(function(lastFields) {
 //        }
 //
 //    }
-
-

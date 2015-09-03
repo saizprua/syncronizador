@@ -46,11 +46,11 @@ exports.getDataOracle = function(lastFields, callback) {
         }
     }
 
-    con.getConnectionOracle(function(err,connection){
+    con.getConnectionOracle(function(err, connection) {
 
-        if(err){
+        if (err) {
 
-            winston.error( err.toString());
+            winston.error(err.toString());
             return callback(null);
         }
 
@@ -75,7 +75,7 @@ exports.insertRowsMysql = function(rows) {
     var connection = con.getConnectionMysql();
 
     connection.query("INSERT INTO erp_empleados(??) VALUES ?", [config.columms, rows], function(err) {
-        if (err)  winston.error(err);
+        if (err) winston.error(err);
         connection.end();
     });
 
@@ -99,4 +99,3 @@ exports.insertOrUpdateRowMysql = function(rows) {
     connection.end();
 
 };
-
