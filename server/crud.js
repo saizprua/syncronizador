@@ -9,7 +9,7 @@ exports.getLastParamMysql = function(callback) {
 
     var connection = con.getConnectionMysql();
 
-    connection.query(query.lastParams,
+    connection.query('SELECT * FROM (SELECT  ifnull(MAX(NUM_EMPLEADO),"") lastNumEmployee FROM '+config.tablesName.mysql+') NumEmployee,(SELECT MAX(FECHA_DEL_SISTEMAU) lastDateUpdateEmployee FROM '+config.tablesName.mysql+') DateUpdateEmployee',
         function(err, rows) {
             connection.end();
 
@@ -55,7 +55,7 @@ exports.getDataOracle = function(lastFields, callback) {
         }
 
         connection.execute(
-            "SELECT " + config.columms + " FROM PLANDAC.EMPLEADOS " + where,
+            "SELECT " + config.columms + " FROM " + config.tablesName.oracle + " " + where,
             params,
             queryConfig,
             function(err, result) {
@@ -75,7 +75,7 @@ exports.insertRowsMysql = function(rows) {
 
     var connection = con.getConnectionMysql();
 
-    connection.query("INSERT INTO erp_empleados(??) VALUES ?", [config.columms, rows], function(err) {
+    connection.query("INSERT INTO "+config.tablesName.mysql+"(??) VALUES ?", [config.columms, rows], function(err) {
         connection.end();
     });
 
@@ -93,7 +93,7 @@ exports.insertOrUpdateRowMysql = function(rows) {
 
     rows.forEach(function(emp) {
 
-        connection.query('INSERT INTO erp_empleados SET ? ON DUPLICATE KEY UPDATE ?', [emp, emp], function(err) {
+        connection.query('INSERT INTO '+config.tablesName.mysql+' SET ? ON DUPLICATE KEY UPDATE ?', [emp, emp], function(err) {
             winston.error(err);
         });
 
