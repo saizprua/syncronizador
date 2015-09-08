@@ -16,6 +16,8 @@ exports.getConnectionOracle = function(callback) {
         config.oracle,
         function(err, connection) {
 
+            if(err) console.log(err);
+
             callback(err, connection);
         });
 

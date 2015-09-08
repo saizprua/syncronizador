@@ -13,7 +13,7 @@ exports.getLastParamMysql = function(callback) {
         function(err, rows) {
             connection.end();
 
-            if (err) winston.error(err);
+            if(err) console.log(err);
 
             var res = rows ? rows[0] : null;
 
@@ -59,7 +59,7 @@ exports.getDataOracle = function(lastFields, callback) {
             params,
             queryConfig,
             function(err, result) {
-                if (err) winston.error(err);
+                if (err) console.log(err);
 
 
                 callback(result);
@@ -76,6 +76,8 @@ exports.insertRowsMysql = function(rows) {
     var connection = con.getConnectionMysql();
 
     connection.query("INSERT INTO "+config.tablesName.mysql+"(??) VALUES ?", [config.columms, rows], function(err) {
+        if(err) console.log(err);
+
         connection.end();
     });
 
@@ -94,7 +96,7 @@ exports.insertOrUpdateRowMysql = function(rows) {
     rows.forEach(function(emp) {
 
         connection.query('INSERT INTO '+config.tablesName.mysql+' SET ? ON DUPLICATE KEY UPDATE ?', [emp, emp], function(err) {
-            winston.error(err);
+            if(err) console.log(err);
         });
 
     });
