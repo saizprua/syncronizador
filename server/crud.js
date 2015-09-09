@@ -59,12 +59,26 @@ exports.getDataOracle = function(lastFields, callback) {
             params,
             queryConfig,
             function(err, result) {
-                if (err) console.log(err);
+                onRelease(connection);
+                if (err) {
+                  onRelease(connection);
+                  console.log(err.message)
+                };
 
-
+                onRelease(connection);
                 callback(result);
             });
     });
+
+    function onRelease(connection){
+      console.log('close session oracle');
+      connection.release(
+        function(err) {
+          if (err) {
+            console.error(err.message);
+          }
+        });
+    }
 
 };
 
