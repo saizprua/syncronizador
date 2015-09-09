@@ -59,10 +59,10 @@ exports.getDataOracle = function(lastFields, callback) {
             params,
             queryConfig,
             function(err, result) {
-                onRelease(connection);
                 if (err) {
                   onRelease(connection);
                   console.log(err.message)
+                  return;
                 };
 
                 onRelease(connection);
