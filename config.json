@@ -16,6 +16,35 @@
     "mysql":"erp_v_emp_transparencia"
   },
   "columms": [
-   "NUM_EMPLEADO"
+   "NUM_POSICION",
+   "NUM_EMPLEADO",
+   "APELLIDO",
+   "APELLIDO2",
+   "APELLIDO_C",
+   "NOMBRE",
+   "NOMBRE2",
+   "UNIDAD_GESTORA",
+   "TOMO",
+   "SIGLAS",
+   "FOLIO",
+   "ASIENTO",
+   "NUM_PLANILLA",
+   "NUM_SS",
+   "CARGO",
+   "DESCRIPCIONCARGOPOSICION",
+   "DESCRIPCIONUNIDAD_GESTORA",
+   "CEDULA",
+   "NOMBRECOMPLETO",
+   "SALARIO",
+   "GASTO_REPRESENTA",
+   "FECHA_NAC",
+   "FECHA_DEL_SISTEMA",
+   "FECHA_DEL_SISTEMAU",
+   "FECHA_INICIO",
+   "FECHA_INICIO_PUESTO",
+   "FECHA_INICIO_REAL",
+   "FECHA_TERMINO",
+   "TPEM_CODIGO",
+   "TPEM_DESCRIPCION"
  ]
 }

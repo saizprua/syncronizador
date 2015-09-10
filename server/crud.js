@@ -2,7 +2,8 @@ var config = require('./../config'),
     query = require('./../query'),
     oracledb = require('oracledb'),
     con = require('./connection'),
-    winston = require('winston');
+    winston = require('winston'),
+
 
 
 exports.getLastParamMysql = function(callback) {
