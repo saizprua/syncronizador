@@ -35,17 +35,16 @@ exports.getDataOracle = function(lastFields, callback) {
         params = {};
 
 
-    if (lastDateUpdate) {
-      // where = 'WHERE FECHA_DEL_SISTEMAU > :lastDateUpdate';
-        where = '';
-        params = {
-            lastDateUpdate: {
-                val: lastDateUpdate,
-                dir: oracledb.BIND_IN,
-                type: oracledb.DATE
-            }
-        }
-    }
+    // if (lastDateUpdate) {
+    //     where = 'WHERE FECHA_DEL_SISTEMAU > :lastDateUpdate';
+    //     params = {
+    //         lastDateUpdate: {
+    //             val: lastDateUpdate,
+    //             dir: oracledb.BIND_IN,
+    //             type: oracledb.DATE
+    //         }
+    //     }
+    // }
 
     con.getConnectionOracle(function(err, connection) {
 
@@ -65,7 +64,6 @@ exports.getDataOracle = function(lastFields, callback) {
                   console.log(err.message)
                   return;
                 };
-
                 onRelease(connection);
                 callback(result);
             });

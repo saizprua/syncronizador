@@ -8,7 +8,7 @@ winston.add(winston.transports.File, {
 
 
 
-schedule.scheduleJob('* 8,13,17 * * *', function(){
+schedule.scheduleJob('*/1 * * * *', function(){
     proc.ecxecute(function(isSuccess){
         if(isSuccess){
             winston.info('Proccess successfully')
