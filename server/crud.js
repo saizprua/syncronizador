@@ -36,7 +36,8 @@ exports.getDataOracle = function(lastFields, callback) {
 
 
     if (lastDateUpdate) {
-        // where = 'WHERE FECHA_DEL_SISTEMAU > :lastDateUpdate';
+      // where = 'WHERE FECHA_DEL_SISTEMAU > :lastDateUpdate';
+        where = '';
         params = {
             lastDateUpdate: {
                 val: lastDateUpdate,
