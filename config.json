@@ -8,8 +8,8 @@
   },
   "oracle":{
     "user"          : "syndb",
-    "password"      : "aig2k15",
-    "connectString" : "ORAERP/PRUEBA"
+    "password"      : "syn2015",
+    "connectString" : "ORAERP/INNOVA"
   },
   "tablesName":{
     "oracle":"PLANDAC.V_EMP_TRANSPARENCIA",
