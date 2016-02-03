@@ -9,7 +9,7 @@
   "oracle":{
     "user"          : "syndb",
     "password"      : "syn2015",
-    "connectString" : "ORAERP/INNOVA"
+    "connectString" : "oraerp.innovacion.net/INNOVA"
   },
   "tablesName":{
     "oracle":"PLANDAC.V_EMP_TRANSPARENCIA",
